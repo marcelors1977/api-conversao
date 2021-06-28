@@ -1,0 +1,39 @@
+Passos para criação da imagem
+
+	1- criar o Arquivo Dockerfile
+
+		FROM node:14-alpine3.13
+
+		WORKDIR /app
+
+		COPY package*.json ./
+
+		RUN npm install
+
+		COPY . .
+
+		EXPOSE 8080
+
+		CMD [ "node","index.js" ]
+
+	2- criar a imagem da aplicação
+
+		docker build -t 19061977/api-conversao:v1 .
+
+	3 - executar o container
+
+		docker run -d -p 8080:8080 19061977/api-conversao:v1
+
+	4 - registrando a imagem no docker hub 
+
+		docker push 19061977/api-conversao:v1
+
+	5- tag para latest e registro da imagem no hub
+
+		docker tag 19061977/api-conversao:v1 19061977/api-conversao:latest
+
+		docker push 19061977/api-conversao:v1
+
+	6 - versionando no git alterações para gerar imagem
+
+		git commit -m "Geração da minha Imagem docker da API-CONVERSAO, fruto do fork de KubeDev/api-conversao"
