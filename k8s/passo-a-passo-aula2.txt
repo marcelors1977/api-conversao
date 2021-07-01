@@ -1,0 +1,31 @@
+Passo a passo para criação dos manifestos para subir a aplicação "API-CONVERSAO" pelo Kubernetes
+
+1 - criação dos clusters Kubernetes
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ k3d cluster create meucluster --servers 1 --agents 2 -p "8080:30000@loadbalancer"
+
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ k3d cluster list
+    NAME         SERVERS   AGENTS   LOADBALANCER
+    meucluster   1/1       2/2      true
+
+
+2 - criação dos manifestos para o deployment e service
+
+3 - subindo o deployment
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ kubectl apply -f deployment.yaml
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ kubectl get deployment
+    NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+    apiconversao-deployment   2/2     2            2           38m
+
+4 - subindo o service
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ kubectl apply -f service.yaml
+
+    ~/docker/kubernets-bootcamp2-0/api-conversao$ kubectl get service
+    NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    kubernetes             ClusterIP   10.43.0.1       <none>        443/TCP          51m
+    apiconversao-service   NodePort    10.43.210.136   <none>        8080:30000/TCP   39m
+
