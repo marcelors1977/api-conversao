@@ -20,6 +20,7 @@ spec:
         ports:
          - containerPort: 8080
 # sessão pára garantir que o pod está respondendo
+#comando para deixar unhealth curl -X PUT http://<IP cedido>/unhealth
 #         livenessProbe:
 #           httpGet:
 #             path: /health
@@ -29,3 +30,21 @@ spec:
 #            timeoutSeconds: 1
 #            successThreshold: 1
 #            failureThreshold: 1
+# verificar se a aplicação está pronta , comando para derrubar e assim poder testar 
+# curl -X PUT http://<IP cedido>/unreadyfor/30
+#         readinessProbe:
+#           httpGet:
+#             path: /ready
+#             port: 8080
+#            initialDelaySeconds: 3
+#            periodSeconds: 2
+#            timeoutSeconds: 1
+#            successThreshold: 1
+#            failureThreshold: 1
+#         resources:
+#             requests:
+#               cpu: "200m"
+#               memory: "32Mi"
+#             limits:
+#               cpu: "400"
+#               memory: "64Mi"
