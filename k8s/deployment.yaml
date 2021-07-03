@@ -18,4 +18,14 @@ spec:
       - name: apiconversao
         image: 19061977/api-conversao:v1
         ports:
-        - containerPort: 8080
+         - containerPort: 8080
+# sessão pára garantir que o pod está respondendo
+#         livenessProbe:
+#           httpGet:
+#             path: /health
+#             port: 8080
+#            initialDelaySeconds: 3
+#            periodSeconds: 2
+#            timeoutSeconds: 1
+#            successThreshold: 1
+#            failureThreshold: 1
